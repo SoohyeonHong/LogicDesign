@@ -17,25 +17,25 @@
 //	--------------------------------------------------
 //	0~59 Counter
 //	--------------------------------------------------
-module cnt60(	o_cnt60,
-				clk,
-				rst_n);
+module cnt60(	      o_cnt60,
+			       	      clk,
+				            rst_n     );
 
-output	[5:0]	o_cnt60		;
-input			clk			;
-input			rst_n		;
+output	[5:0]	 o_cnt60		     ;
+input			      clk			        ;
+input			      rst_n		       ;
 
-reg		[5:0]	o_cnt60		;
+reg		  [5:0]	 o_cnt60		     ;
 always @(posedge clk or negedge rst_n) begin
-	if(rst_n == 1'b0) begin
-		o_cnt60 <= 6'd0;
-	end else begin
-		if(o_cnt60 >= 6'd59) begin
-			o_cnt60 <= 6'd0;
-		end else begin
-			o_cnt60 <= o_cnt60 + 1'b1;
-		end
-	end
+	 	   if(rst_n == 1'b0) begin
+	       	o_cnt60 <= 6'd0                  ;
+	     end else begin
+	       	if(o_cnt60 >= 6'd59) begin
+		        	o_cnt60 <= 6'd0               ;
+	    	end else begin
+			       o_cnt60 <= o_cnt60 + 1'b1     ;
+	     end
+	   end
 end
 
 endmodule
@@ -44,29 +44,29 @@ endmodule
 //	Numerical Controlled Oscillator
 //	Hz of o_gen_clk = Clock Hz / num
 //	--------------------------------------------------
-module	nco(	o_gen_clk,
-				i_nco_num,
-				clk,
-				rst_n);
+module	nco(	  o_gen_clk,
+				      i_nco_num,
+				      clk,
+				      rst_n         );
 
-output			o_gen_clk	;	// 1Hz CLK
+output		      o_gen_clk 	   ;	// 1Hz CLK
 
-input	[31:0]	i_nco_num	;
-input			clk			;	// 50Mhz CLK
-input			rst_n		;
+input	[31:0]	 i_nco_num    	;
+input			      clk			        ;	// 50Mhz CLK
+input			      rst_n		       ;
 
-reg		[31:0]	cnt			;
-reg				o_gen_clk	;
+reg		 [31:0]	 cnt			        ;
+reg				      o_gen_clk	    ;
 always @(posedge clk or negedge rst_n) begin
-	if(rst_n == 1'b0) begin
-		cnt		<= 32'd0;
-		o_gen_clk	<= 1'd0	;
-	end else begin
-		if(cnt >= i_nco_num/2-1) begin
-			cnt 	<= 32'd0;
-			o_gen_clk	<= ~o_gen_clk;
-		end else begin
-			cnt <= cnt + 1'b1;
+	   if(rst_n == 1'b0) begin
+		    cnt		<= 32'd0;
+		    o_gen_clk	<= 1'd0	;
+	   end else begin
+		    if(cnt >= i_nco_num/2-1) begin
+		    	cnt 	<= 32'd0;
+			   o_gen_clk	<= ~o_gen_clk;
+		 end else begin
+	     		cnt <= cnt + 1'b1;
 		end
 	end
 end
@@ -77,40 +77,40 @@ endmodule
 //	NCO Clock Based 0~59 Counter
 //	--------------------------------------------------
 module	nco_cnt(
-				o_nco_cnt,
-				i_nco_num,
-				clk,
-				rst_n);
+			 	           	o_nco_cnt,
+				            i_nco_num,
+		              		clk,
+		  	           		rst_n         );
 
-output	[5:0]	o_nco_cnt	;
+output	   [5:0]	    o_nco_cnt	;
 
-input	[31:0]	i_nco_num	;
-input			clk			;
-input			rst_n		;
+input	    [31:0]	   i_nco_num	;
+input			            clk			;
+input			            rst_n		;
 
-wire			gen_clk		;
-nco		u_nco(	.o_gen_clk	( gen_clk	),
-				.i_nco_num	( i_nco_num	),
-				.clk		( clk		),
-				.rst_n		( rst_n		));
+wire			             gen_clk		;
+nco		         u_nco(	       .o_gen_clk	( gen_clk	   ),
+				                    .i_nco_num	( i_nco_num	 ),
+				                    .clk		     ( clk		      ),
+				                    .rst_n		   ( rst_n		    ));
 
-cnt60	u_cnt60(.o_cnt60	( o_nco_cnt	),
-				.clk		( gen_clk	),
-				.rst_n		( rst_n		));
+cnt60	        u_cnt60(      .o_cnt60	  ( o_nco_cnt	 ),
+				                    .clk		     ( gen_clk	   ),
+				                    .rst_n		   ( rst_n		    ));
 
 endmodule
 
 //	--------------------------------------------------
 //	Flexible Numerical Display Decoder
 //	--------------------------------------------------
-module	fnd_dec(o_seg,
-				i_num);
+module	fnd_dec(           o_seg,
+				                  i_num);
 
-output	[6:0]	o_seg		;	// {o_seg_a, o_seg_b, ... , o_seg_g}
+output	   [6:0]	o_seg		;	// {o_seg_a, o_seg_b, ... , o_seg_g}
 
-input	 [3:0]	i_num		;
+input	    [3:0]	i_num		;
 
-reg    [6:0] o_seg ; 
+reg     	 [6:0] o_seg ; 
 
 always @(*) begin
     case( i_num )
@@ -129,17 +129,17 @@ endmodule
 //	0~59 --> 2 Separated Segments
 //	--------------------------------------------------
 module	double_fig_sep(
-				o_left,
-				o_right,
-				i_double_fig);
+			                     	o_left,
+			                     	o_right,
+			                     	i_double_fig     );
 
-output	[3:0]	o_left		;
-output	[3:0]	o_right		;
+output	[3:0]	o_left		             ;
+output	[3:0]	o_right		            ;
 
-input	[5:0]	i_double_fig;
+input	 [5:0]	i_double_fig         ;
 
-assign	o_left = i_double_fig / 10;
-assign	o_right  = i_double_fig % 10;
+assign	   o_left    =   i_double_fig / 10;
+assign	   o_right   =   i_double_fig % 10;
 
 endmodule
 
@@ -248,30 +248,30 @@ wire  [6:0]  seg_right;
 assign			six_digit_seg = { {4{7'b0000000}}, seg_left, seg_right }	;
 
 nco_cnt			u_nco_cnt( 	
-									.o_nco_cnt		(  nco_cnt	),
-									.i_nco_num		(  32'd50000000		),
-									.clk			     (  clk		),
-									.rst_n			   (  rst_n	));
+									         .o_nco_cnt		(  nco_cnt	      ),
+									         .i_nco_num		(  32'd50000000		),
+								          	.clk			     (  clk		         ),
+								          	.rst_n			   (  rst_n	        ));
 			
 double_fig_sep		u_double_fig_sep(
-									.o_left			   (  left		),
-									.o_right		   (  right	),
-									.i_double_fig	(  nco_cnt	 ));
+							                      		.o_left			    (  left	    	),
+								                     	.o_right		    (  right	    ),
+							                      		.i_double_fig	(  nco_cnt	  ));
 
-fnd_dec			u0_find_dec(			.o_seg			(  seg_left		 ),
-									       .i_num			(  left		 ));
+fnd_dec			u0_find_dec(			         .o_seg			(  seg_left		   ),
+									                .i_num			(  left		       ));
 
-fnd_dec			u1_find_dec(			.o_seg			(  seg_right		 ),
-									       .i_num			(  right	 ));
+fnd_dec			u1_find_dec(			         .o_seg			(  seg_right		  ),
+									                .i_num			(  right	       ));
 
 led_disp  led_display(
-				        .o_seg             ( o_seg      ),
-			         	.o_seg_dp          ( o_seg_dp   ),
-			         	.o_seg_enb         ( o_seg_enb  ),
+				        .o_seg             ( o_seg          ),
+			         	.o_seg_dp          ( o_seg_dp       ),
+			         	.o_seg_enb         ( o_seg_enb      ),
 				        .i_six_digit_seg   ( six_digit_seg  ),
-				        .i_six_dp          ( 6'd0       ),
-			         	.clk               ( clk        ),
-				        .rst_n             ( rst_n      ));
+				        .i_six_dp          ( 6'd0           ),
+			         	.clk               ( clk            ),
+				        .rst_n             ( rst_n          ));
 				        
 
 endmodule
