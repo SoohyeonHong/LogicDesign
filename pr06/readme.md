@@ -24,9 +24,11 @@ assign        six_digit_seg = { 4{7'b0000000}, seg_left, seg_right }
 `assign        six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_left, seg_right } ;`
 ## 결과
 ### **Top Module 의 DUT/TestBench Code 및 Waveform 검증 **
-`Please fill up your source`
+![](https://github.com/SoohyeonHong/LogicDesign/blob/master/pr06/figs/wave.png)
 ### **FPGA 동작 사진 (3 개 - 일반 , Q1, Q2)**
-`Please fill up your source`
+![](https://github.com/SoohyeonHong/LogicDesign/blob/master/pr06/figs/%EC%9D%BC%EB%B0%98.jpg)
+![](https://github.com/SoohyeonHong/LogicDesign/blob/master/pr06/figs/AAAA01.jpg)
+![](https://github.com/SoohyeonHong/LogicDesign/blob/master/pr06/figs/010101.jpg)
 
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbMTk3MzM5MDM0MV19
