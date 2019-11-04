@@ -34,5 +34,5 @@ assign        six_digit_seg = { 4{7'b0000000}, seg_left, seg_right }
 ![](https://github.com/SoohyeonHong/LogicDesign/blob/master/pr06/figs/010101.jpg)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk3MzM5MDM0MV19
+eyJoaXN0b3J5IjpbMTYyMDE0NzkyMCwxOTczMzkwMzQxXX0=
 -->
