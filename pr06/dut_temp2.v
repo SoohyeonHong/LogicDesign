@@ -18,8 +18,8 @@
 //	0~59 Counter
 //	--------------------------------------------------
 module cnt60(	      o_cnt60,
-			       	      clk,
-				            rst_n     );
+		      clk,
+		      rst_n     );
 
 output	[5:0]	 o_cnt60		     ;
 input			      clk			        ;
