@@ -736,7 +736,7 @@ fnd_dec     u0_fnd_dec(
 		
 fnd_dec     u1_fnd_dec(
 		.o_seg  	(  seg_sec_right     	),
-		.i_num   	( sec_o_right    	));
+		.i_num   	(  sec_o_right    	));
 		
 wire [41:0]  i_six_digit_seg ;
 assign i_six_digit_seg = { {2{7'b0000000}}, seg_min_left , seg_min_right, seg_sec_left, seg_sec_right };
