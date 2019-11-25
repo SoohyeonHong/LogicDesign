@@ -2,7 +2,7 @@
 	## 실습 내용
 	### ** 9 – FPGA의 리모컨을 이용하는 실습 **
 	#### **Submodule 1**
-	: 0~9 의 값을 갖는 4bit 입력 신호를 받아 7bit FND  segment  값 출력
+	: Normal Leader Code 
 	#### **Submodule 2**
 	: 0~59 의 값을 갖는 6bit 입력 신호를 받아 십의 자리 수와 일의 자리 수를 각각 4bit 으로 출력
 #### **Top Module**
@@ -42,5 +42,5 @@ assign        six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_le
 ![](https://github.com/SoohyeonHong/LogicDesign/blob/master/pr06/figs/010101.jpg)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU5ODU5ODQzMCwxOTczMzkwMzQxXX0=
+eyJoaXN0b3J5IjpbLTEwMjc4MzU2MjIsMTk3MzM5MDM0MV19
 -->
