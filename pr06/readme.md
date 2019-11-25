@@ -54,10 +54,133 @@ FPGA에 있는 숫자를 표현하는 o_seg_(a~g)까지의 7-segment에 4bit 숫
 
 위에서부터 4'd0~4d'9는 숫자 0에서 9까지를 표현하며, 10부터는 각각 A,b,C,d,E,F를 표현한다.
 ### **2. ir_rx**
+```
+//	--------------------------------------------------
+//	IR Rx Module: Note : Inverted IR Rx Signal
+//	--------------------------------------------------
+module	ir_rx(	
+		o_data,
+		i_ir_rxb,
+		clk,
+		rst_n);
+
+output	[31:0]	o_data		;
+
+input		i_ir_rxb	;
+input		clk		;
+input		rst_n		;
+
+parameter	IDLE		= 2'b00	;
+parameter	LEADCODE	= 2'b01	;	// 9ms high 4.5ms low
+parameter	DATACODE	= 2'b10	;	// Custom & Data Code
+parameter	COMPLETE	= 2'b11	;	// 32-bit data
+
+//		1M Clock = 1 us Reference Time
+wire		clk_1M				;
+nco		u_nco(
+		.o_gen_clk	( clk_1M	),
+		.i_nco_num	( 32'd50	),
+		.clk		( clk		),
+		.rst_n		( rst_n		));
+
+//		Sequential Rx Bits
+
+wire		ir_rx		;
+assign		ir_rx = ~i_ir_rxb;
+
+reg	[1:0]	seq_rx				;
+always @(posedge clk_1M or negedge rst_n) begin
+	if(rst_n == 1'b0) begin
+		seq_rx <= 2'b00;
+	end else begin
+		seq_rx <= {seq_rx[0], ir_rx};
+	end
+end
+
+//		Count Signal Polarity (High & Low)
+reg	[15:0]	cnt_h		;
+reg	[15:0]	cnt_l		;
+always @(posedge clk_1M or negedge rst_n) begin
+	if(rst_n == 1'b0) begin
+		cnt_h <= 16'd0;
+		cnt_l <= 16'd0;
+	end else begin
+		case(seq_rx)
+			2'b00	: cnt_l <= cnt_l + 1;
+			2'b01	: begin
+				cnt_l <= 16'd0;
+				cnt_h <= 16'd0;
+			end
+			2'b11	: cnt_h <= cnt_h + 1;
+		endcase
+	end
+end
+
+//		State Machine
+reg	[1:0]	state		;
+reg	[5:0]	cnt32		;
+always @(posedge clk_1M or negedge rst_n) begin
+	if(rst_n == 1'b0) begin
+		state <= IDLE;
+		cnt32 <= 6'd0;
+	end else begin
+		case (state)
+			IDLE: begin
+				state <= LEADCODE;
+				cnt32 <= 6'd0;
+			end
+			LEADCODE: begin
+				if (cnt_h >= 8500 && cnt_l >= 4000) begin
+					state <= DATACODE;
+				end else begin
+					state <= LEADCODE;
+				end
+			end
+			DATACODE: begin
+				if (seq_rx == 2'b01) begin
+					cnt32 <= cnt32 + 1;
+				end else begin
+					cnt32 <= cnt32;
+				end
+				if (cnt32 >= 6'd32 && cnt_l >= 1000) begin
+					state <= COMPLETE;
+				end else begin
+					state <= DATACODE;
+				end
+			end
+			COMPLETE: state <= IDLE;
+		endcase
+	end
+end
+
+//		32bit Custom & Data Code
+reg	[31:0]	data		;
+reg	[31:0]	o_data		;
+always @(posedge clk_1M or negedge rst_n) begin
+	if(rst_n == 1'b0) begin
+		data <= 32'd0;
+	end else begin
+		case (state)
+			DATACODE: begin
+				if (cnt_l >= 1000) begin
+					data[32-cnt32] <= 1'b1;
+				end else begin
+					data[32-cnt32] <= 1'b0;
+				end
+			end
+			COMPLETE: o_data <= data;
+		endcase
+	end
+end
+
+
+endmodule
+```
+
 
 ## **Top Module**
 : 저번 시간에 만든 second counter  및 Submodule 1/2 를 이용하여  실습 장비의 LED 에 맞는 Display Module 설계
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAxMzUzODQ0NiwxODM5Nzk0Mjg4LC0xMD
-MwNzY5NTkyLDE5NzMzOTAzNDFdfQ==
+eyJoaXN0b3J5IjpbMzc4ODE5NjQ2LDE4Mzk3OTQyODgsLTEwMz
+A3Njk1OTIsMTk3MzM5MDM0MV19
 -->
