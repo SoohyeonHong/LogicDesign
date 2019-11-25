@@ -177,11 +177,11 @@ end
 endmodule
 ```
 적외선(Infrared Rays, IR) 컨트롤러, 즉 리모컨을 IR Controller라고 하는데, 이는 적외선 발광 다이오드로 발생시킬 수 있다. 우리는 리모컨에서 발생시킨 적외선을 받아와 신호로 입력시켜야 하는데, 송신부 코드를 짜는 것이므로 이를 일반적으로 rx라고 한다. 
-이에는 NEC 적외선  통신 규약이 적용되는데, 32비트 짜리 신호가 송신된다는 것이다. 이는 Leader Code와 Custom Code, Data Code를 가지고 있는데 우리는 이 중에서 필요없는 앞 코드는 버리고 뒷 콛
+이에는 NEC 적외선  통신 규약이 적용되는데, 32비트 짜리 신호가 송신된다는 것이다. 이 신호는 Leader Code와 Custom Code(16bit, 회사 정보 포함), Custom Code의 앞 8자리를 뒤집어 붙인 Data Code(8bit)와 진짜 정보인 Data Code(8bit)를 가지고 있는데 우리는 이 중에서 필요없는 앞 코드는 버리고 진짜 정보를 가진 뒷 코드를 가져올 것이다.
 
 ## **Top Module**
 : 저번 시간에 만든 second counter  및 Submodule 1/2 를 이용하여  실습 장비의 LED 에 맞는 Display Module 설계
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTQ2Nzc2NTAsMTgzOTc5NDI4OCwtMTAzMD
-c2OTU5MiwxOTczMzkwMzQxXX0=
+eyJoaXN0b3J5IjpbLTIwODA2NjExOTEsMTgzOTc5NDI4OCwtMT
+AzMDc2OTU5MiwxOTczMzkwMzQxXX0=
 -->
