@@ -176,11 +176,11 @@ end
 
 endmodule
 ```
-
+적외선(Infrared Rays, IR) 컨트롤러, 즉 리모컨을 IR Controller라고 하는데, 이는 적외선 발광 다이오드로 발생시킬 수 있다. 우리는 리모컨에서 발생시킨 적외선을 받아와 신호로 입력시켜야 하는데, 송신부 코드를 짜는 것이므로 이르rx
 
 ## **Top Module**
 : 저번 시간에 만든 second counter  및 Submodule 1/2 를 이용하여  실습 장비의 LED 에 맞는 Display Module 설계
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzc4ODE5NjQ2LDE4Mzk3OTQyODgsLTEwMz
-A3Njk1OTIsMTk3MzM5MDM0MV19
+eyJoaXN0b3J5IjpbNDQ2NDE5MjcsMTgzOTc5NDI4OCwtMTAzMD
+c2OTU5MiwxOTczMzkwMzQxXX0=
 -->
