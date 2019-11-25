@@ -1,4 +1,4 @@
-# Lab 06
+# Lab 09
 	## 실습 내용
 	### **7 – Segment Display Decoder ( 개별 )**
 	#### **Submodule 1**
@@ -42,5 +42,5 @@ assign        six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_le
 ![](https://github.com/SoohyeonHong/LogicDesign/blob/master/pr06/figs/010101.jpg)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk5MjcwMTQxMSwxOTczMzkwMzQxXX0=
+eyJoaXN0b3J5IjpbLTc3NTE0MjcyLDE5NzMzOTAzNDFdfQ==
 -->
