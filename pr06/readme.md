@@ -12,43 +12,49 @@
 	: led_disp
 	fnd_dec으로부터 bit를 받아 led로 숫자나 문자를 띄움
 ## **<모듈별 상세 설명>** 
-### **1.  nco**
+### **1. fnd dec**
 ```
-module	nco(	
-		o_gen_clk,
-		i_nco_num,
-		clk,
-		rst_n);
 
-output			o_gen_clk	;	// 1Hz CLK
+//	--------------------------------------------------
+//	Flexible Numerical Display Decoder
+//	--------------------------------------------------
+module	fnd_dec(
+		o_seg,
+		i_num);
 
-input	[31:0]	i_nco_num	;
-input			clk			;	// 50Mhz CLK
-input			rst_n		;
+output	[6:0]	o_seg		;	// {o_seg_a, o_seg_b, ... , o_seg_g}
 
-reg		[31:0]	cnt			;
-reg				o_gen_clk	;
-
-always @(posedge clk or negedge rst_n) begin
-	if(rst_n == 1'b0) begin
-		cnt		<= 32'd0				;
-		o_gen_clk	<= 1'd0				;
-	end else begin
-		if(cnt >= i_nco_num/2-1) begin
-			cnt 	<= 32'd0			;
-			o_gen_clk	<= ~o_gen_clk	;
-		end else begin
-			cnt <= cnt + 1'b1			;
-		end
-	end
+input	[3:0]	i_num		;
+reg		[6:0]	o_seg		;
+//making
+always @(i_num) begin 
+ 	case(i_num) 
+ 		4'd0:	o_seg = 7'b111_1110; 
+ 		4'd1:	o_seg = 7'b011_0000; 
+ 		4'd2:	o_seg = 7'b110_1101; 
+ 		4'd3:	o_seg = 7'b111_1001; 
+ 		4'd4:	o_seg = 7'b011_0011; 
+ 		4'd5:	o_seg = 7'b101_1011; 
+ 		4'd6:	o_seg = 7'b101_1111; 
+ 		4'd7:	o_seg = 7'b111_0000; 
+ 		4'd8:	o_seg = 7'b111_1111; 
+ 		4'd9:	o_seg = 7'b111_0011; 
+ 		4'd10:	o_seg = 7'b111_0111; 
+ 		4'd11:	o_seg = 7'b001_1111; 
+ 		4'd12:	o_seg = 7'b100_1110; 
+ 		4'd13:	o_seg = 7'b011_1101; 
+ 		4'd14:	o_seg = 7'b100_1111; 
+ 		4'd15:	o_seg = 7'b100_0111; 
+		default:o_seg = 7'b000_0000; 
+	endcase 
 end
 
 endmodule
 ```
-clk을 생성하는 모듈
+segment
 ## **Top Module**
 : 저번 시간에 만든 second counter  및 Submodule 1/2 를 이용하여  실습 장비의 LED 에 맞는 Display Module 설계
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg3NzQ2ODQxNiwxODM5Nzk0Mjg4LC0xMD
+eyJoaXN0b3J5IjpbMTU5MTUzMTU4MiwxODM5Nzk0Mjg4LC0xMD
 MwNzY5NTkyLDE5NzMzOTAzNDFdfQ==
 -->
