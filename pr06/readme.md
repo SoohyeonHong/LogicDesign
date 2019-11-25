@@ -51,10 +51,12 @@ end
 
 endmodule
 ```
-segment
+FPGA에 있는 숫자를 표현하는 o_seg_(a~g)까지의 7-segment에 4bit 숫자를 입력했을 때 해당하는 숫자나 문자가 어느 seg를 킬 것인지를 표현한 것이다.
+
+위에서부터 4d
 ## **Top Module**
 : 저번 시간에 만든 second counter  및 Submodule 1/2 를 이용하여  실습 장비의 LED 에 맞는 Display Module 설계
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU5MTUzMTU4MiwxODM5Nzk0Mjg4LC0xMD
+eyJoaXN0b3J5IjpbMTcxMDIyNzI3MSwxODM5Nzk0Mjg4LC0xMD
 MwNzY5NTkyLDE5NzMzOTAzNDFdfQ==
 -->
