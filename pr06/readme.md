@@ -1,6 +1,6 @@
 # Lab 09
 	## 실습 내용
-	### **7 – Segment Display Decoder ( 개별 )**
+	### ** 9 – FPGA의 리모컨을 이용하는 실습 **
 	#### **Submodule 1**
 	: 0~9 의 값을 갖는 4bit 입력 신호를 받아 7bit FND  segment  값 출력
 	#### **Submodule 2**
@@ -42,5 +42,5 @@ assign        six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_le
 ![](https://github.com/SoohyeonHong/LogicDesign/blob/master/pr06/figs/010101.jpg)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc3NTE0MjcyLDE5NzMzOTAzNDFdfQ==
+eyJoaXN0b3J5IjpbLTU5ODU5ODQzMCwxOTczMzkwMzQxXX0=
 -->
