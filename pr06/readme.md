@@ -6,6 +6,8 @@
 	Sequential Rx Bits를 받아오는 모듈
 	#### **Submodule 2**
 	: 0~59 의 값을 갖는 6bit 입력 신호를 받아 십의 자리 수와 일의 자리 수를 각각 4bit 으로 출력
+	#### **Submodule 2**
+	: 
 #### **Top Module**
 : 저번 시간에 만든 second counter  및 Submodule 1/2 를 이용하여  실습 장비의 LED 에 맞는 Display Module 설계
 ### FPGA 실습 ( 팀 )
@@ -43,5 +45,5 @@ assign        six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_le
 ![](https://github.com/SoohyeonHong/LogicDesign/blob/master/pr06/figs/010101.jpg)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MTAzNzU5NzUsMTk3MzM5MDM0MV19
+eyJoaXN0b3J5IjpbLTk4MzY4NzkwMywxOTczMzkwMzQxXX0=
 -->
