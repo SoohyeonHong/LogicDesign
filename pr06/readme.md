@@ -11,8 +11,8 @@
 	#### **Submodule 2**
 	: led_disp
 	fnd_dec으로부터 bit를 받아 led로 숫자나 문자를 띄움
-## **모듈별 상세 설명** 
-### **>> nco Module**
+## **<모듈별 상세 설명>** 
+### **1.  nco**
 ```
 module	nco(	
 		o_gen_clk,
@@ -20,14 +20,14 @@ module	nco(
 		clk,
 		rst_n);
 
-output		o_gen_clk	;	// 1Hz CLK
+output			o_gen_clk	;	// 1Hz CLK
 
 input	[31:0]	i_nco_num	;
-input		clk				;	// 50Mhz CLK
-input		rst_n			;
+input			clk			;	// 50Mhz CLK
+input			rst_n		;
 
-reg	[31:0]	cnt		;
-reg		o_gen_clk	;
+reg		[31:0]	cnt			;
+reg				o_gen_clk	;
 
 always @(posedge clk or negedge rst_n) begin
 	if(rst_n == 1'b0) begin
@@ -44,12 +44,11 @@ always @(posedge clk or negedge rst_n) begin
 end
 
 endmodule
-
-
 ```
+clk을 생성하는 모듈
 ## **Top Module**
 : 저번 시간에 만든 second counter  및 Submodule 1/2 를 이용하여  실습 장비의 LED 에 맞는 Display Module 설계
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk5MDM1MDMzLDE4Mzk3OTQyODgsLTEwMz
-A3Njk1OTIsMTk3MzM5MDM0MV19
+eyJoaXN0b3J5IjpbMTg3NzQ2ODQxNiwxODM5Nzk0Mjg4LC0xMD
+MwNzY5NTkyLDE5NzMzOTAzNDFdfQ==
 -->
