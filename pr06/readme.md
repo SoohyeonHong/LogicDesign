@@ -7,7 +7,7 @@
 	Sequential Rx Bits를 받아오는 모듈
 	#### **Submodule 2**
 	: fnd_dec
-	0~59 의 값을 갖는 6bit 입력 신호를 받아 십의 자리 수와 일의 자리 수를 각각 4bit 으로 출력
+	FPGA의 7-segment에 해당하는 숫자나 문자에
 	#### **Submodule 2**
 	: led_disp
 #### **Top Module**
@@ -47,5 +47,6 @@ assign        six_digit_seg = { seg_left, seg_right, seg_left, seg_right, seg_le
 ![](https://github.com/SoohyeonHong/LogicDesign/blob/master/pr06/figs/010101.jpg)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMzA3Njk1OTIsMTk3MzM5MDM0MV19
+eyJoaXN0b3J5IjpbMTg0MzU1MTcyOCwtMTAzMDc2OTU5MiwxOT
+czMzkwMzQxXX0=
 -->
