@@ -29,6 +29,44 @@ end
 
 endmodule
 
+
+//	--------------------------------------------------
+//	Blinking
+//	--------------------------------------------------
+module blink(
+		clk,
+		LED);
+
+input		clk	;
+output		LED	;
+
+reg	[1:0]	counter	;
+reg 		LED_status;
+
+nco	blink_nco(	
+		.o_gen_clk	( clk_bnk	),
+		.i_nco_num	( 32'd12500000	),
+		.clk		( clk		),
+		.rst_n		( rst_n		));
+
+initial begin
+	counter <= 1'b0;
+	LED_status <= 1'b0;
+end
+
+always @(posedge clk_bnk or negedge rst_n) begin
+	counter <= counter +1'b1;
+	if (counter >= 1) begin
+		LED_status <= !LED_status;
+		counter <= 1'b0;
+	end
+end
+
+assign LED = LED_status;
+
+endmodule
+
+
 //	--------------------------------------------------
 //	Flexible Numerical Display Decoder
 //	--------------------------------------------------
@@ -149,6 +187,7 @@ always @(cnt_common_node) begin
 		default:o_seg_dp = 1'b0;
 	endcase
 end
+
 
 reg	[6:0]	o_seg			;
 
@@ -533,7 +572,7 @@ wire		clk_bit		;
 
 nco	u_nco_bit(	
 		.o_gen_clk	( clk_bit	),
-		.i_nco_num	( 12500000	),	//4Hz
+		.i_nco_num	( 32'd12500000	),	//4Hz
 		.clk		( clk		),
 		.rst_n		( rst_n		));
 
@@ -553,7 +592,7 @@ end
 
 reg	[31:0]	nco_num		;
 
-always @ (*) begin
+always @ (posedge clk_bit or negedge rst_n) begin
 	case(cnt)
 		6'd00: nco_num = E	;
 		6'd04: nco_num = D	;
@@ -735,6 +774,9 @@ led_disp        u_led_disp(
 		.clk    	( clk  			),
 		.rst_n    	( rst_n  		));
 
+blink		u_blink(
+		.clk		( clk			),
+		.LED		( o_seg_dp		));
 
 buzz  u_buzz(
 		.o_buzz   	( o_alarm    		),
